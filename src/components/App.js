@@ -3,7 +3,9 @@ import styles from '../styles/styles.scss';
 
 const App = () => {
     return (
-            <div className={styles.hello}>Hello World!</div>
+            <div className={styles.hello}>
+                <p>Hello</p>
+            </div>
     );
 };
 

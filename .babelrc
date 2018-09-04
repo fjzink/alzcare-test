@@ -2,6 +2,6 @@
     "presets": [
         "env",
         "react",
-        "@babel/preset-stage-1"
+        "stage-1"
     ]
 }
