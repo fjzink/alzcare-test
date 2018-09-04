@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from '../styles/styles.scss';
+
+import ImageSearch from './ImageSearch';
 
 const App = () => {
     return (
-            <div className={styles.hello}>
-                <p>Hello</p>
+            <div className={'App'}>
+                <ImageSearch />
             </div>
     );
 };
