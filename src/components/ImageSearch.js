@@ -10,7 +10,21 @@ class ImageSearch extends Component {
         this.props.setTags(value);
     }
 
+    formatTags = (tags) => {
+        let formattedTags = tags;
+        formattedTags = formattedTags.replace(/\s+/g, ',');
+        formattedTags = formattedTags.replace(/,+/g, ',');
+        const lastChar = formattedTags[formattedTags.length - 1];
+        if (lastChar === ',') {
+            formattedTags = formattedTags.slice(0, -1);
+        }
+        return formattedTags;
+    }
+
     handleSubmit = () => {
+        const { tags } = this.props.search;
+        const formattedTags = this.formatTags(tags);
+        console.log(formattedTags);
     }
 
     render() {
