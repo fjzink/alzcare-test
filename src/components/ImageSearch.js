@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Form, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import jsonp from 'jsonp';
 
 import { setTags } from '../actions/search_actions';
+
+function jsonFlickrFeed(json) {
+    return json;
+}
 
 class ImageSearch extends Component {
     handleTagChange = (e, { value }) => {
@@ -24,7 +28,15 @@ class ImageSearch extends Component {
     handleSubmit = () => {
         const { tags } = this.props.search;
         const formattedTags = this.formatTags(tags);
-        console.log(formattedTags);
+        const flickrFeedURL = 'https://api.flickr.com/services/feeds/photos_public.gne';
+        const requestURL = `${flickrFeedURL}?format=json&tags=${formattedTags}`;
+        jsonp(requestURL, { name: 'jsonFlickrFeed' }, (err, data) => {
+            if (err) {
+                console.error(err.message);
+            } else {
+                console.log(data.items);
+            }
+        });
     }
 
     render() {

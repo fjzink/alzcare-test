@@ -8,5 +8,6 @@
         "no-unused-vars": 0,
         "arrow-body-style": 0,
         "indent": 0
-    }
+    },
+    "env": { "browser": true }
 }
