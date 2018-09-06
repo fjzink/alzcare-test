@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import jsonp from 'jsonp';
 
 import { setTags, setPhotos } from '../actions/search_actions';
+import styles from '../styles/image_search.scss';
 
 function jsonFlickrFeed(json) {
     return json;
@@ -43,10 +44,10 @@ class ImageSearch extends Component {
     renderPhotos = (photos) => {
         return photos.map((photo) => {
         return (
-            <img
+            <Card
                 key={photo.media.m}
-                src={photo.media.m}
-                alt={photo.media.m}
+                image={photo.media.m}
+                header={photo.title}
             />
         );
         });
@@ -65,7 +66,12 @@ class ImageSearch extends Component {
                     </Form.Group>
                     <Form.Button>Search</Form.Button>
                 </Form>
-                {this.renderPhotos(photos)}
+                <Card.Group
+                    className={styles.cardGroup}
+                    centered
+                >
+                    {this.renderPhotos(photos)}
+                </Card.Group>
             </div>
         );
     }
