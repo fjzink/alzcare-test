@@ -3,7 +3,7 @@ import { Form, Input } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import jsonp from 'jsonp';
 
-import { setTags } from '../actions/search_actions';
+import { setTags, setPhotos } from '../actions/search_actions';
 
 function jsonFlickrFeed(json) {
     return json;
@@ -34,13 +34,26 @@ class ImageSearch extends Component {
             if (err) {
                 console.error(err.message);
             } else {
-                console.log(data.items);
+                const photos = data.items;
+                this.props.setPhotos(photos);
             }
         });
     }
 
+    renderPhotos = (photos) => {
+        return photos.map((photo) => {
+        return (
+            <img
+                key={photo.media.m}
+                src={photo.media.m}
+                alt={photo.media.m}
+            />
+        );
+        });
+    }
+
     render() {
-        const { tags } = this.props.search;
+        const { tags, photos } = this.props.search;
         return (
             <div className={'ImageSearch'}>
                 <Form onSubmit={this.handleSubmit}>
@@ -52,6 +65,7 @@ class ImageSearch extends Component {
                     </Form.Group>
                     <Form.Button>Search</Form.Button>
                 </Form>
+                {this.renderPhotos(photos)}
             </div>
         );
     }
@@ -61,4 +75,4 @@ function mapStateToProps(state) {
     return { search: state.search };
 }
 
-export default connect(mapStateToProps, { setTags })(ImageSearch);
+export default connect(mapStateToProps, { setTags, setPhotos })(ImageSearch);
